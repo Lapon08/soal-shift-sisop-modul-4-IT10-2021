@@ -26,15 +26,9 @@ int istouch2 = 0;
 void logFile(char *level, char *cmd, char *info)
 {
 	FILE *f = fopen("/home/ubuntu/SinSeiFS.log", "a");
-	time_t t;
-	struct tm *tmp;
-	char timeBuff[100];
-
-	time(&t);
-	tmp = localtime(&t);
-	strftime(timeBuff, sizeof(timeBuff), "%d%m%y-%H:%M:%S", tmp);
-
-	fprintf(f, "%s::%s:%s::%s\n", level, timeBuff, cmd, info);
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+	fprintf(f, "%s::%02d%02d%04d-%02d:%02d:%02d:%s::%s\n", level,tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec, cmd, info);
 
 	fclose(f);
 }
