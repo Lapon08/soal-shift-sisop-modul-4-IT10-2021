@@ -91,14 +91,6 @@ void encript2(char *pathname)
 		return;
 	}
 
-	int size = strlen(pathname);
-	char tmp[size];
-
-	for (int i = 0; i < size; i++)
-	{
-		tmp[i] = pathname[i];
-	}
-
 	// ekstensi
 	char *ekstensi = strrchr(pathname, '.');
 	if (ekstensi == NULL)
@@ -210,13 +202,6 @@ void decript2(char *pathname)
 	else if (!strcmp(pathname, ".."))
 	{
 		return;
-	}
-	int size = strlen(pathname);
-	char temp[size];
-
-	for (int i = 0; i < size; i++)
-	{
-		temp[i] = pathname[i];
 	}
 
 	int flag1 = 0, flag2 = 0;
@@ -901,8 +886,8 @@ static int xmp_rmdir(const char *path)
 	else if (strstr(path, "RX_") != NULL)
 	{
 		char *encv1 = strstr(path, "RX_");
+		decript2(encv1);
 		decript1(encv1);
-
 		strcpy(fpath, dirpath);
 		strcat(fpath, "/");
 		strcat(fpath, encv1);
